@@ -1,0 +1,67 @@
+<div class="container">
+  <!-- <div class="header">
+    <h2>Job Scheduler</h2>
+    <h2>Home</h2>
+    <h2>About</h2>
+  </div> -->
+  <mat-toolbar color="primary">
+    <span>Job Scheduler</span>
+    <span class="example-spacer"></span>
+    <span  class="example-icon" (click)="openDialog()">About</span>
+  </mat-toolbar>
+  <div class="content">
+    <label style="margin-left: 20px; font-family: sans-serif; font-weight: bold;">Number of CPU:</label>
+    <input style="margin-left: 10px;" type="number" appNumeric [(ngModel)]="numberOfCPUs">
+    <button style="margin-left: 10px;" color="primary" (click)="addJob()">Add Job</button>
+    <div class="schedule-buttons">
+      <button (click)="calculateSchedule('FCFS')">Calculate FCFS Schedule</button>
+      <button (click)="calculateSchedule('SJF')">Calculate SJF Schedule</button>
+    </div>
+    <div style="margin: 20px">
+    <table>
+      <thead>
+        <tr>
+          <th>Job</th>
+          <th>Arrival Time</th>
+          <th>Burst Time</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td><input type="number" appNumeric [(ngModel)]="job.arrivalTime"></td>
+          <td><input type="number" appNumeric [(ngModel)]="job.burstTime"></td>
+          <td><button (click)="removeJob(i)">Remove</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div *ngIf="averageTurnaroundTime">
+      <div style="margin: 20px">
+      <h3>Average Turnaround Time for {{algo}}: {{ averageTurnaroundTime }}</h3>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Job</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Turnaround Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of jobs; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ job.startTime }}</td>
+            <td>{{ job.endTime }}</td>
+            <td>{{ job.turnaroundTime }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </div>
+    </div>
+  </div>
+ 
+</div>
